@@ -1,3 +1,5 @@
+//Code from docs.oracle.com/javafx/2/get_standard/form.htm
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -9,6 +11,8 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 public class SimpleForm extends Application 
 {
@@ -40,13 +44,19 @@ public class SimpleForm extends Application
 	grid.add(pwBox, 1, 2);
 		
 	Button btn = new Button("Sign in");
+	final Text actiontarget = new Text();
+	grid.add(actiontarget, 1, 6);
+	btn.setOnAction(new EventHandler<ActionEvent>() {
+		@Override
+		public void handle(ActionEvent e) {
+			actiontarget.setFill(Color.FIREBRICK);
+			actiontarget.setText("Sign in button pressed");
+		}
+	});
 	HBox hbBtn = new HBox(10);
 	hbBtn.setAlignment(Pos.BOTTOM_RIGHT); 
 	hbBtn.getChildren().add(btn);
 	grid.add(hbBtn, 1, 4);
-		
-	Text actiontarget = new Text();
-        grid.add(actiontarget, 1, 6);
 
 	Scene scene = new Scene(grid, 300, 275);
 	stage.setScene(scene);
@@ -58,5 +68,3 @@ public class SimpleForm extends Application
     }
 
 }
-
-
